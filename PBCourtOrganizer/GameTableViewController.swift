@@ -11,7 +11,6 @@ import UIKit
 class GameTableViewController: UITableViewController {
   
   var game = Game()
-  var players = [Player]()
   
   
   override func viewDidLoad() {
@@ -47,42 +46,13 @@ class GameTableViewController: UITableViewController {
       let cell = tableView.dequeueReusableCell(withIdentifier: "CourtCell", for: indexPath) as! CourtTableViewCell
       cell.courtLabel.text = "Court \(indexPath.row)"
       
-      var t1p1 = ""
-      if let p = court.team1?.player1 {
-        if p < players.count {
-          let player = players[p]
-          t1p1 = "\(player.firstName) \(player.lastName)"
-        }
-      }
-      var t1p2 = ""
-      if let p = court.team1?.player2 {
-        if p < players.count {
-          let player = players[p]
-          t1p2 = "\(player.firstName) \(player.lastName)"
-        }
-      }
-      cell.team1Label.text = "\(t1p1, t1p2)"
+      cell.team1Label.text = getPlayerName(p: court.team1?.player1) + ", " + getPlayerName(p: court.team1?.player2)
+      cell.team2Label.text = getPlayerName(p: court.team2?.player1) + ", " + getPlayerName(p: court.team2?.player2)
       
-      var t2p1 = ""
-      if let p = court.team2?.player1 {
-        if p < players.count {
-          let player = players[p]
-          t2p1 = "\(player.firstName) \(player.lastName)"
-        }
-      }
-      var t2p2 = ""
-      if let p = court.team2?.player2 {
-        if p < players.count {
-          let player = players[p]
-          t2p2 = "\(player.firstName) \(player.lastName)"
-        }
-      }
-      cell.team2Label.text = "\(t2p1, t2p2)"
-
-
       return cell
     } else {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "CourtCell", for: indexPath) as! SpareTableViewCell
+      let cell = tableView.dequeueReusableCell(withIdentifier: "SpareCell", for: indexPath) as! SpareTableViewCell
+      cell.spareLabel.text = getPlayerName(p: game.spares[indexPath.row])
       return cell
     }
   }

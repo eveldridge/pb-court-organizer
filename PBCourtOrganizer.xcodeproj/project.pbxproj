@@ -11,11 +11,14 @@
 		1934605D1F7144A800AC0034 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1934605B1F7144A800AC0034 /* Main.storyboard */; };
 		1934605F1F7144A800AC0034 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1934605E1F7144A800AC0034 /* Assets.xcassets */; };
 		193460621F7144A800AC0034 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 193460601F7144A800AC0034 /* LaunchScreen.storyboard */; };
-		1934606A1F7148E600AC0034 /* CourtsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193460691F7148E600AC0034 /* CourtsViewController.swift */; };
+		1934606A1F7148E600AC0034 /* ConfigureCourtsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193460691F7148E600AC0034 /* ConfigureCourtsViewController.swift */; };
 		1934606C1F714A9800AC0034 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1934606B1F714A9800AC0034 /* Common.swift */; };
 		1934606E1F72F8EB00AC0034 /* GameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1934606D1F72F8EB00AC0034 /* GameTableViewController.swift */; };
 		193460701F72FB4900AC0034 /* CourtTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1934606F1F72FB4900AC0034 /* CourtTableViewCell.swift */; };
 		193460721F73D8F800AC0034 /* SpareTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193460711F73D8F800AC0034 /* SpareTableViewCell.swift */; };
+		193460741F73E33300AC0034 /* SharedAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193460731F73E33300AC0034 /* SharedAssets.swift */; };
+		1934607E1F73F90A00AC0034 /* GamesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1934607D1F73F90A00AC0034 /* GamesPageViewController.swift */; };
+		193460801F73FA5700AC0034 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1934607F1F73FA5700AC0034 /* GameViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,11 +28,14 @@
 		1934605E1F7144A800AC0034 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		193460611F7144A800AC0034 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		193460631F7144A800AC0034 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		193460691F7148E600AC0034 /* CourtsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourtsViewController.swift; sourceTree = "<group>"; };
+		193460691F7148E600AC0034 /* ConfigureCourtsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigureCourtsViewController.swift; sourceTree = "<group>"; };
 		1934606B1F714A9800AC0034 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		1934606D1F72F8EB00AC0034 /* GameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameTableViewController.swift; sourceTree = "<group>"; };
 		1934606F1F72FB4900AC0034 /* CourtTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourtTableViewCell.swift; sourceTree = "<group>"; };
 		193460711F73D8F800AC0034 /* SpareTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpareTableViewCell.swift; sourceTree = "<group>"; };
+		193460731F73E33300AC0034 /* SharedAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedAssets.swift; sourceTree = "<group>"; };
+		1934607D1F73F90A00AC0034 /* GamesPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamesPageViewController.swift; sourceTree = "<group>"; };
+		1934607F1F73FA5700AC0034 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,11 +68,14 @@
 		193460561F7144A800AC0034 /* PBCourtOrganizer */ = {
 			isa = PBXGroup;
 			children = (
+				193460731F73E33300AC0034 /* SharedAssets.swift */,
 				193460571F7144A800AC0034 /* AppDelegate.swift */,
 				1934605B1F7144A800AC0034 /* Main.storyboard */,
-				193460691F7148E600AC0034 /* CourtsViewController.swift */,
-				1934606B1F714A9800AC0034 /* Common.swift */,
+				193460691F7148E600AC0034 /* ConfigureCourtsViewController.swift */,
+				1934607D1F73F90A00AC0034 /* GamesPageViewController.swift */,
+				1934607F1F73FA5700AC0034 /* GameViewController.swift */,
 				1934606D1F72F8EB00AC0034 /* GameTableViewController.swift */,
+				1934606B1F714A9800AC0034 /* Common.swift */,
 				1934606F1F72FB4900AC0034 /* CourtTableViewCell.swift */,
 				193460711F73D8F800AC0034 /* SpareTableViewCell.swift */,
 				1934605E1F7144A800AC0034 /* Assets.xcassets */,
@@ -149,9 +158,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				193460741F73E33300AC0034 /* SharedAssets.swift in Sources */,
+				1934607E1F73F90A00AC0034 /* GamesPageViewController.swift in Sources */,
 				1934606E1F72F8EB00AC0034 /* GameTableViewController.swift in Sources */,
 				1934606C1F714A9800AC0034 /* Common.swift in Sources */,
-				1934606A1F7148E600AC0034 /* CourtsViewController.swift in Sources */,
+				193460801F73FA5700AC0034 /* GameViewController.swift in Sources */,
+				1934606A1F7148E600AC0034 /* ConfigureCourtsViewController.swift in Sources */,
 				193460721F73D8F800AC0034 /* SpareTableViewCell.swift in Sources */,
 				193460701F72FB4900AC0034 /* CourtTableViewCell.swift in Sources */,
 				193460581F7144A800AC0034 /* AppDelegate.swift in Sources */,
@@ -281,6 +293,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = R2V7Z98BC4;
 				INFOPLIST_FILE = PBCourtOrganizer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cDs.PBCourtOrganizer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -294,6 +307,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = R2V7Z98BC4;
 				INFOPLIST_FILE = PBCourtOrganizer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cDs.PBCourtOrganizer;
 				PRODUCT_NAME = "$(TARGET_NAME)";

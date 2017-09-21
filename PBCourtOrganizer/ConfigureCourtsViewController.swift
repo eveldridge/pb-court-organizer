@@ -1,5 +1,5 @@
 //
-//  CourtsViewController.swift
+//  ConfigureCourtsViewController.swift
 //  PBCourtOrganizer
 //
 //  Created by Evelyn Eldridge on 2017-09-19.
@@ -9,12 +9,9 @@
 import UIKit
 import GameKit
 
-
-
-class CourtsViewController: UIViewController {
+class ConfigureCourtsViewController: UIViewController {
   
   let totalCourts = 2
-  var players = [Player]()
   var teams = [Team]()
   var sparesCount = 0
   var games = [Game]()
@@ -53,7 +50,7 @@ class CourtsViewController: UIViewController {
         }
       }
     }
-    
+    SharedAssets.sharedInstance.games = bestGames
     printSchedule()
     
     // Do any additional setup after loading the view.
@@ -61,7 +58,7 @@ class CourtsViewController: UIViewController {
   func fixGame (g:Int) {
     let game = bestGames[g]
     var needToAdd = [Int]()
-    for p in 0...players.count - 1 {
+    for p in 0...SharedAssets.sharedInstance.players.count - 1 {
       if !isInThisGame(game: game, player: p) {
         needToAdd.append(p)
       }
@@ -93,6 +90,7 @@ class CourtsViewController: UIViewController {
     
   }
   func addPlayers () {
+    var players = [Player]()
     let player = Player(firstName: "Evelyn", lastName: "ELdridge")
     players.append(player)
     
@@ -128,6 +126,8 @@ class CourtsViewController: UIViewController {
     
     //      let player11 = Player(firstName: "Trudy", lastName: "Donnely")
     //      players.append(player11)
+    
+    SharedAssets.sharedInstance.players = players
   }
   
   override func didReceiveMemoryWarning() {
@@ -136,40 +136,25 @@ class CourtsViewController: UIViewController {
   }
   
   func printSchedule () {
-    for i in 0...bestGames.count - 1 {
-      let game = bestGames[i]
+    for i in 0...SharedAssets.sharedInstance.games.count - 1 {
+      let game = SharedAssets.sharedInstance.games[i]
       print("GAME: \(i)")
       //      print("GAME: \(i) spares: \(bestGames[i].spares)")
       for j in 0...game.courts.count - 1 {
         let court = game.courts[j]
-        
-        var t1p1 = ""
-        var t1p2 = ""
-        if let t1 = court.team1 {
-          if let p1 = t1.player1 {
-            t1p1 = "\(players[p1].firstName) \(players[p1].lastName)"
-          }
-          if let p2 = t1.player2 {
-            t1p2 = "\(players[p2].firstName) \(players[p2].lastName)"
-          }
-        }
-        
-        var t2p1 = ""
-        var t2p2 = ""
-        if let t2 = court.team2 {
-          if let p1 = t2.player1 {
-            t2p1 = "\(players[p1].firstName) \(players[p1].lastName)"
-          }
-          if let p2 = t2.player2 {
-            t2p2 = "\(players[p2].firstName) \(players[p2].lastName)"
-          }
-        }
+
+        let t1p1 = getPlayerName(p: court.team1?.player1)
+        let t1p2 = getPlayerName(p: court.team1?.player2)
+        let t2p1 = getPlayerName(p: court.team2?.player1)
+        let t2p2 = getPlayerName(p: court.team2?.player2)
         print("court: \(j) team1: \(t1p1)     \(t1p2)")
         print("            team2: \(t2p1)     \(t2p2)")
+
+        
       }
       print ("SPARES:")
       for spare in game.spares {
-        print ("        \(players[spare].firstName) \(players[spare].lastName)")
+        print ("        \(getPlayerName(p: spare))")
       }
     }
   }
@@ -177,9 +162,9 @@ class CourtsViewController: UIViewController {
   // Create a unique list of ALL possible teams
   func createTeams () {
     var count = 0
-    for i in 0...players.count - 1 {
-      if i < players.count - 1 {
-        for j in i + 1...players.count - 1 {
+    for i in 0...SharedAssets.sharedInstance.players.count - 1 {
+      if i < SharedAssets.sharedInstance.players.count - 1 {
+        for j in i + 1...SharedAssets.sharedInstance.players.count - 1 {
           let team = Team(player1: i, player2: j)
           count = count + 1
           //          print ("\(count) \(team)")
@@ -205,13 +190,13 @@ class CourtsViewController: UIViewController {
   
   // Assign Spares Randomly to each game, Repeat as needed
   func assignSpares() {
-    sparesCount = players.count - (totalCourts * 4)
+    sparesCount = SharedAssets.sharedInstance.players.count - (totalCourts * 4)
     guard sparesCount > 0 else {
       return
     }
     
     var spares = [Int]()
-    for i in 0...players.count - 1 {
+    for i in 0...SharedAssets.sharedInstance.players.count - 1 {
       spares.append(i)
     }
     let shuffled = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: spares)
@@ -225,7 +210,7 @@ class CourtsViewController: UIViewController {
         games[i].spares.append(spares[currentSpare])
         //        print("Spare \(j) \(spares[currentSpare])")
         currentSpare = currentSpare + 1
-        if currentSpare > players.count - 1 {
+        if currentSpare > SharedAssets.sharedInstance.players.count - 1 {
           currentSpare = 0
         }
       }
@@ -313,13 +298,12 @@ class CourtsViewController: UIViewController {
   }
   
   
-  // MARK: - Navigation
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "ShowGame" {
-      let detailVC = segue.destination as! GameTableViewController
-      detailVC.game = bestGames[0]
-      detailVC.players = players
-    }
-  }
+//  // MARK: - Navigation
+//  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//    if segue.identifier == "ShowGame" {
+//      let detailVC = segue.destination as! GameTableViewController
+//      detailVC.game = bestGames[0]
+//    }
+//  }
 
 }

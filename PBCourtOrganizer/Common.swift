@@ -27,3 +27,19 @@ struct Game {
   var courts = [Court]()
   var spares = [Int]()
 }
+
+
+func getPlayerName (p:Int?) -> String {
+  guard let playerIndex = p else {
+    return ""
+  }
+  
+  guard playerIndex <= SharedAssets.sharedInstance.players.count - 1 else {
+    return ""
+  }
+  
+  var name = ""
+  name = "\(SharedAssets.sharedInstance.players[playerIndex].firstName) \(SharedAssets.sharedInstance.players[playerIndex].lastName)"
+  
+  return name
+}
