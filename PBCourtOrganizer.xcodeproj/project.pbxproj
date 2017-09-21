@@ -8,20 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		193460581F7144A800AC0034 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193460571F7144A800AC0034 /* AppDelegate.swift */; };
-		1934605A1F7144A800AC0034 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193460591F7144A800AC0034 /* ViewController.swift */; };
 		1934605D1F7144A800AC0034 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1934605B1F7144A800AC0034 /* Main.storyboard */; };
 		1934605F1F7144A800AC0034 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1934605E1F7144A800AC0034 /* Assets.xcassets */; };
 		193460621F7144A800AC0034 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 193460601F7144A800AC0034 /* LaunchScreen.storyboard */; };
+		1934606A1F7148E600AC0034 /* CourtsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193460691F7148E600AC0034 /* CourtsViewController.swift */; };
+		1934606C1F714A9800AC0034 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1934606B1F714A9800AC0034 /* Common.swift */; };
+		1934606E1F72F8EB00AC0034 /* GameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1934606D1F72F8EB00AC0034 /* GameTableViewController.swift */; };
+		193460701F72FB4900AC0034 /* CourtTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1934606F1F72FB4900AC0034 /* CourtTableViewCell.swift */; };
+		193460721F73D8F800AC0034 /* SpareTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193460711F73D8F800AC0034 /* SpareTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		193460541F7144A800AC0034 /* PBCourtOrganizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PBCourtOrganizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		193460571F7144A800AC0034 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		193460591F7144A800AC0034 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1934605C1F7144A800AC0034 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1934605E1F7144A800AC0034 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		193460611F7144A800AC0034 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		193460631F7144A800AC0034 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		193460691F7148E600AC0034 /* CourtsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourtsViewController.swift; sourceTree = "<group>"; };
+		1934606B1F714A9800AC0034 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		1934606D1F72F8EB00AC0034 /* GameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameTableViewController.swift; sourceTree = "<group>"; };
+		1934606F1F72FB4900AC0034 /* CourtTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourtTableViewCell.swift; sourceTree = "<group>"; };
+		193460711F73D8F800AC0034 /* SpareTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpareTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +63,12 @@
 			isa = PBXGroup;
 			children = (
 				193460571F7144A800AC0034 /* AppDelegate.swift */,
-				193460591F7144A800AC0034 /* ViewController.swift */,
 				1934605B1F7144A800AC0034 /* Main.storyboard */,
+				193460691F7148E600AC0034 /* CourtsViewController.swift */,
+				1934606B1F714A9800AC0034 /* Common.swift */,
+				1934606D1F72F8EB00AC0034 /* GameTableViewController.swift */,
+				1934606F1F72FB4900AC0034 /* CourtTableViewCell.swift */,
+				193460711F73D8F800AC0034 /* SpareTableViewCell.swift */,
 				1934605E1F7144A800AC0034 /* Assets.xcassets */,
 				193460601F7144A800AC0034 /* LaunchScreen.storyboard */,
 				193460631F7144A800AC0034 /* Info.plist */,
@@ -137,7 +149,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1934605A1F7144A800AC0034 /* ViewController.swift in Sources */,
+				1934606E1F72F8EB00AC0034 /* GameTableViewController.swift in Sources */,
+				1934606C1F714A9800AC0034 /* Common.swift in Sources */,
+				1934606A1F7148E600AC0034 /* CourtsViewController.swift in Sources */,
+				193460721F73D8F800AC0034 /* SpareTableViewCell.swift in Sources */,
+				193460701F72FB4900AC0034 /* CourtTableViewCell.swift in Sources */,
 				193460581F7144A800AC0034 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
