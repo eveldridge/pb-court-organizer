@@ -11,14 +11,13 @@ import UIKit
 class GameTableViewController: UITableViewController {
   
   var game = Game()
+  var gameNumber = 1
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.reloadData()
     tableView.tableFooterView = UIView()
-    
-    
   }
   
   override func didReceiveMemoryWarning() {
@@ -40,8 +39,36 @@ class GameTableViewController: UITableViewController {
     }
   }
   
+  override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    if section == 0 {
+      let headerView = UIView()
+//      headerView.backgroundColor = UIColor.green
+      
+      let headerLabel = UILabel(frame: CGRect(x: 30, y: 0, width:
+        tableView.bounds.size.width, height: tableView.bounds.size.height))
+//      headerLabel.font = UIFont(name: "Verdana", size: 20)
+      headerLabel.font = UIFont.systemFont(ofSize: 24)
+//      headerLabel.textColor = UIColor.white
+      headerLabel.text = self.tableView(self.tableView, titleForHeaderInSection: section)
+      headerLabel.sizeToFit()
+      headerView.addSubview(headerLabel)
+      
+      return headerView
+    } else {
+      return tableView.headerView(forSection: 1)
+    }
+    
+  }
+  
+  override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return 40
+  }
+  
+  
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    if section == 1 {
+    if section == 0 {
+      return "Game \(gameNumber)"
+    } else if section == 1 {
       return "Spares"
     }
     return ""

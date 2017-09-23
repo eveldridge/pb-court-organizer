@@ -52,7 +52,7 @@
                                                                             <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </state>
                                                                         <connections>
-                                                                            <segue destination="dib-u2-AOt" kind="popoverPresentation" identifier="AddPlayer" popoverAnchorView="eUr-e6-F3g" id="Yoz-wT-wHi">
+                                                                            <segue destination="jl2-kw-lLP" kind="popoverPresentation" identifier="AddPlayer" popoverAnchorView="eUr-e6-F3g" id="Yoz-wT-wHi">
                                                                                 <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                                                             </segue>
                                                                         </connections>
@@ -317,7 +317,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1460.15625" y="-37.774524158125914"/>
+            <point key="canvasLocation" x="2184.375" y="-37.774524158125914"/>
         </scene>
         <!--Games Page View Controller-->
         <scene sceneID="Rkf-tX-KD6">
@@ -325,9 +325,9 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="JdZ-c1-4Q3" customClass="GamesPageViewController" customModule="PBCourtOrganizer" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B6F-sP-SrT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2130" y="-38"/>
+            <point key="canvasLocation" x="2854.1015625" y="-38.213762811127374"/>
         </scene>
-        <!--Add Player View Controller-->
+        <!--Add New Player-->
         <scene sceneID="Ykd-S2-HQF">
             <objects>
                 <viewController id="dib-u2-AOt" customClass="AddPlayerViewController" customModule="PBCourtOrganizer" customModuleProvider="target" sceneMemberID="viewController">
@@ -336,17 +336,17 @@
                         <viewControllerLayoutGuide type="bottom" id="zgH-iG-Ad7"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="aTN-Gf-HaK">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="qMP-ov-Pkw">
-                                <rect key="frame" x="60" y="60" width="547" height="220"/>
+                                <rect key="frame" x="60" y="104" width="904" height="220"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Rv2-Y7-LjG">
-                                        <rect key="frame" x="0.0" y="0.0" width="547" height="140"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="904" height="140"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yHz-Ys-gHs">
-                                                <rect key="frame" x="0.0" y="0.0" width="547" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="904" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="sKb-uQ-px1"/>
                                                 </constraints>
@@ -355,7 +355,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VaM-4O-7mf">
-                                                <rect key="frame" x="0.0" y="80" width="547" height="60"/>
+                                                <rect key="frame" x="0.0" y="80" width="904" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="yxz-MJ-ezm"/>
                                                 </constraints>
@@ -366,10 +366,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="DiL-Uy-u70">
-                                        <rect key="frame" x="0.0" y="160" width="547" height="60"/>
+                                        <rect key="frame" x="0.0" y="160" width="904" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O2e-2n-oTZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="263.5" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="442" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="c2c-eP-yUw"/>
                                                 </constraints>
@@ -379,7 +379,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aNq-q0-Ts7">
-                                                <rect key="frame" x="283.5" y="0.0" width="263.5" height="60"/>
+                                                <rect key="frame" x="462" y="0.0" width="442" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="LLp-TL-2y2"/>
                                                 </constraints>
@@ -400,6 +400,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="qMP-ov-Pkw" secondAttribute="trailing" constant="40" id="x6m-T6-okn"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Add New Player" id="dMO-JJ-uZg"/>
                     <connections>
                         <outlet property="firstNameTextField" destination="yHz-Ys-gHs" id="fcq-I1-Sif"/>
                         <outlet property="lastNameTextField" destination="VaM-4O-7mf" id="ybT-uC-iyj"/>
@@ -408,7 +409,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hXP-0T-WgQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="cic-EP-El1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1460" y="472"/>
+            <point key="canvasLocation" x="2183.7890625" y="471.74231332357243"/>
         </scene>
         <!--Game Table View Controller-->
         <scene sceneID="x0M-ua-WEq">
@@ -427,7 +428,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="sG7-3h-UB3">
-                                            <rect key="frame" x="20" y="10" width="489" height="115"/>
+                                            <rect key="frame" x="20" y="10" width="684" height="115"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZcD-eF-GY6">
                                                     <rect key="frame" x="0.0" y="24" width="85" height="67"/>
@@ -453,19 +454,19 @@
                                                     </constraints>
                                                 </stackView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bL9-9R-IzQ">
-                                                    <rect key="frame" x="105" y="0.0" width="384" height="115"/>
+                                                    <rect key="frame" x="105" y="0.0" width="579" height="115"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="x72-WW-qh7">
-                                                            <rect key="frame" x="20" y="20" width="344" height="75"/>
+                                                            <rect key="frame" x="20" y="20" width="539" height="75"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Team 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sQu-7G-cZU">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="344" height="10"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="539" height="10"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="vs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ka3-v8-US8">
-                                                                    <rect key="frame" x="0.0" y="20" width="344" height="21"/>
+                                                                    <rect key="frame" x="0.0" y="20" width="539" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="21" id="xfs-61-dxF"/>
                                                                     </constraints>
@@ -474,7 +475,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="soq-ka-qhN">
-                                                                    <rect key="frame" x="0.0" y="51" width="344" height="24"/>
+                                                                    <rect key="frame" x="0.0" y="51" width="539" height="24"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="24" id="zH0-00-Epn"/>
                                                                     </constraints>
@@ -563,7 +564,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pUA-d0-NqI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3323" y="-100"/>
+            <point key="canvasLocation" x="4047.0703124999995" y="-100.14641288433381"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="X8Y-Pa-OCd">
@@ -632,7 +633,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jED-T4-cdF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2786" y="-38"/>
+            <point key="canvasLocation" x="3509.765625" y="-38.213762811127374"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="F1f-te-c9K">
@@ -651,6 +652,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v2k-Em-Agd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="669.71514242878561" y="-37.600000000000001"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="zXx-3L-vdb">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jl2-kw-lLP" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zoK-Yb-Xpx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="dib-u2-AOt" kind="relationship" relationship="rootViewController" id="SKW-6V-Sg2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CPL-mB-frp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1459.5703125" y="471.74231332357243"/>
         </scene>
     </scenes>
 </document>

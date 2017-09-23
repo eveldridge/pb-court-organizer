@@ -7,6 +7,14 @@
 //
 
 import Foundation
+import UIKit
+
+struct kcolour {
+  static let navBar = UIColor(red: 69/255, green: 176/255, blue: 70/255, alpha: 1.0)
+  static let fadedGreen = UIColor(red: 69/255, green: 176/255, blue: 70/255, alpha: 0.5)
+  static let fadedOrange = UIColor(red: 255/255, green: 128/255, blue: 0/255, alpha: 0.5)
+  static let orange = UIColor(red: 255/255, green: 128/255, blue: 0/255, alpha: 1.0)
+}
 
 struct Player {
   var firstName = "First Name"

@@ -30,6 +30,7 @@ class GameViewController: UIViewController {
     if segue.identifier == "ShowGame" {
       let detailVC = segue.destination as! GameTableViewController
       detailVC.game = game!
+      detailVC.gameNumber = index + 1
     }
   }
 

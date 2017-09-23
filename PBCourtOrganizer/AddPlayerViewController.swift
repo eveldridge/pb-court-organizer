@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddPlayerViewController: UIViewController {
+class AddPlayerViewController: UIViewController, UITextFieldDelegate {
   @IBOutlet weak var firstNameTextField: UITextField!
   @IBOutlet weak var lastNameTextField: UITextField!
   
@@ -17,7 +17,19 @@ class AddPlayerViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.navigationController?.styleForPB()
     firstNameTextField.becomeFirstResponder()
+    firstNameTextField.delegate = self
+    lastNameTextField.delegate = self
+  }
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    if textField == firstNameTextField {
+      lastNameTextField.becomeFirstResponder()
+    } else {
+      firstNameTextField.becomeFirstResponder()
+    }
+    return true
   }
   
   override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

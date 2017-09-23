@@ -33,6 +33,7 @@ class ConfigureCourtsViewController: UIViewController {
   // MARK: - ViewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.navigationController?.styleForPB()
     selectedPlayersTableView.tableFooterView = UIView()
     allPlayersTableVIew.backgroundColor = UIColor.groupTableViewBackground
     allPlayersTableVIew.tableFooterView = UIView()
@@ -85,6 +86,10 @@ class ConfigureCourtsViewController: UIViewController {
       }
     }
     SharedAssets.sharedInstance.games = bestGames
+    // Reset the view
+    games.removeAll()
+    bestGames.removeAll()
+    
     printSchedule()
   }
   
@@ -413,6 +418,7 @@ extension ConfigureCourtsViewController : UITableViewDataSource, UITableViewDele
     let player = allPlayersFiltered[indexPath.row]
     let success = SharedAssets.sharedInstance.deletePlayer(player: player)
     if success {
+      allPlayers = SharedAssets.sharedInstance.loadPlayers()
       allPlayersFiltered.remove(at: indexPath.row)
       tableView.deleteRows(at: [indexPath], with: .fade)
     }

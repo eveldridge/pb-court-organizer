@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1921B7121F7440F8003FE7BF /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1921B7111F7440F8003FE7BF /* libsqlite3.0.tbd */; };
 		1921B7161F752642003FE7BF /* AddPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921B7151F752642003FE7BF /* AddPlayerViewController.swift */; };
+		1921B7181F76069C003FE7BF /* GameTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921B7171F76069C003FE7BF /* GameTimerViewController.swift */; };
+		1921B71A1F76BBF6003FE7BF /* UINavigationController+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921B7191F76BBF5003FE7BF /* UINavigationController+Style.swift */; };
 		193460581F7144A800AC0034 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193460571F7144A800AC0034 /* AppDelegate.swift */; };
 		1934605D1F7144A800AC0034 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1934605B1F7144A800AC0034 /* Main.storyboard */; };
 		1934605F1F7144A800AC0034 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1934605E1F7144A800AC0034 /* Assets.xcassets */; };
@@ -31,6 +33,8 @@
 /* Begin PBXFileReference section */
 		1921B7111F7440F8003FE7BF /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		1921B7151F752642003FE7BF /* AddPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPlayerViewController.swift; sourceTree = "<group>"; };
+		1921B7171F76069C003FE7BF /* GameTimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameTimerViewController.swift; sourceTree = "<group>"; };
+		1921B7191F76BBF5003FE7BF /* UINavigationController+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Style.swift"; sourceTree = "<group>"; };
 		193460541F7144A800AC0034 /* PBCourtOrganizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PBCourtOrganizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		193460571F7144A800AC0034 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1934605C1F7144A800AC0034 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -108,10 +112,12 @@
 				1921B7151F752642003FE7BF /* AddPlayerViewController.swift */,
 				1934607D1F73F90A00AC0034 /* GamesPageViewController.swift */,
 				1934607F1F73FA5700AC0034 /* GameViewController.swift */,
+				1921B7171F76069C003FE7BF /* GameTimerViewController.swift */,
 				1934606D1F72F8EB00AC0034 /* GameTableViewController.swift */,
 				1934606B1F714A9800AC0034 /* Common.swift */,
 				1934606F1F72FB4900AC0034 /* CourtTableViewCell.swift */,
 				193460711F73D8F800AC0034 /* PlayerTableViewCell.swift */,
+				1921B7191F76BBF5003FE7BF /* UINavigationController+Style.swift */,
 				1934605E1F7144A800AC0034 /* Assets.xcassets */,
 				193460601F7144A800AC0034 /* LaunchScreen.storyboard */,
 				193460631F7144A800AC0034 /* Info.plist */,
@@ -213,10 +219,12 @@
 			files = (
 				193460741F73E33300AC0034 /* SharedAssets.swift in Sources */,
 				1921B7161F752642003FE7BF /* AddPlayerViewController.swift in Sources */,
+				1921B7181F76069C003FE7BF /* GameTimerViewController.swift in Sources */,
 				1934607E1F73F90A00AC0034 /* GamesPageViewController.swift in Sources */,
 				1934606E1F72F8EB00AC0034 /* GameTableViewController.swift in Sources */,
 				1934608D1F741DDA00AC0034 /* FMDatabase.m in Sources */,
 				1934606C1F714A9800AC0034 /* Common.swift in Sources */,
+				1921B71A1F76BBF6003FE7BF /* UINavigationController+Style.swift in Sources */,
 				1934608F1F741DDA00AC0034 /* FMDatabaseQueue.m in Sources */,
 				193460801F73FA5700AC0034 /* GameViewController.swift in Sources */,
 				1934606A1F7148E600AC0034 /* ConfigureCourtsViewController.swift in Sources */,

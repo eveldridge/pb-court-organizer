@@ -25,16 +25,6 @@ class GamesPageViewController: UIPageViewController, UIPageViewControllerDelegat
                                        animated: false,
                                        completion: nil)
     
-    
-    
-    
-    
-//    self.addChildViewController(pageController!)
-//    self.view.addSubview(self.pageController!.view)
-//    
-//    let pageViewRect = self.view.bounds
-//    pageController!.view.frame = pageViewRect    
-//    pageController!.didMoveToParentViewController(self)
   }
   
   override func didReceiveMemoryWarning() {
@@ -44,8 +34,6 @@ class GamesPageViewController: UIPageViewController, UIPageViewControllerDelegat
   
   
   func viewControllerAtIndex(index: Int) -> GameViewController? {
-    let gameNumber = index + 1
-    title = "Game \(gameNumber)"
     if (SharedAssets.sharedInstance.games.count == 0) ||
       (index >= SharedAssets.sharedInstance.games.count) {
       return nil
@@ -63,13 +51,6 @@ class GamesPageViewController: UIPageViewController, UIPageViewControllerDelegat
   func indexOfViewController(viewController: GameViewController) -> Int {
     let gameVC = viewController as GameViewController
     return gameVC.index
-    
-    
-    //    if let game: AnyObject = viewController.game as AnyObject {
-    //      return SharedAssets.sharedInstance.games.index(where: game)
-    //    } else {
-    //      return NSNotFound
-    //    }
   }
   
   func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -100,15 +81,4 @@ class GamesPageViewController: UIPageViewController, UIPageViewControllerDelegat
     }
     return viewControllerAtIndex(index: index)
   }
-  
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using segue.destinationViewController.
-   // Pass the selected object to the new view controller.
-   }
-   */
-  
 }

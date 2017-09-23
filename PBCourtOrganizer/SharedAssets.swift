@@ -91,10 +91,10 @@ class SharedAssets  {
           return false
         }
       }
-      catch {
-        print(error.localizedDescription)
-        return false
-      }
+//      catch {
+//        print(error.localizedDescription)
+//        return false
+//      }
       database.close()
     }
     return true
@@ -113,10 +113,6 @@ class SharedAssets  {
         while results.next() {
           let player = Player(firstName: results.string(forColumn: "firstName")!,
                               lastName: results.string(forColumn: "lastName")!)
-          
-          if players == nil {
-            players = [Player]()
-          }
           
           players.append(player)
         }
