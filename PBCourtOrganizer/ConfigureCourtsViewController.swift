@@ -89,8 +89,10 @@ class ConfigureCourtsViewController: UIViewController {
     // Reset the view
     games.removeAll()
     bestGames.removeAll()
+    allocatedCount = 0
+    bestAllocatedCount = 0
     
-    printSchedule()
+//    printSchedule()
   }
   
   // If there are any games without 4 players, fix them
