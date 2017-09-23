@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1921B7121F7440F8003FE7BF /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1921B7111F7440F8003FE7BF /* libsqlite3.0.tbd */; };
+		1921B7161F752642003FE7BF /* AddPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921B7151F752642003FE7BF /* AddPlayerViewController.swift */; };
 		193460581F7144A800AC0034 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193460571F7144A800AC0034 /* AppDelegate.swift */; };
 		1934605D1F7144A800AC0034 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1934605B1F7144A800AC0034 /* Main.storyboard */; };
 		1934605F1F7144A800AC0034 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1934605E1F7144A800AC0034 /* Assets.xcassets */; };
@@ -15,13 +17,20 @@
 		1934606C1F714A9800AC0034 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1934606B1F714A9800AC0034 /* Common.swift */; };
 		1934606E1F72F8EB00AC0034 /* GameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1934606D1F72F8EB00AC0034 /* GameTableViewController.swift */; };
 		193460701F72FB4900AC0034 /* CourtTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1934606F1F72FB4900AC0034 /* CourtTableViewCell.swift */; };
-		193460721F73D8F800AC0034 /* SpareTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193460711F73D8F800AC0034 /* SpareTableViewCell.swift */; };
+		193460721F73D8F800AC0034 /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193460711F73D8F800AC0034 /* PlayerTableViewCell.swift */; };
 		193460741F73E33300AC0034 /* SharedAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193460731F73E33300AC0034 /* SharedAssets.swift */; };
 		1934607E1F73F90A00AC0034 /* GamesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1934607D1F73F90A00AC0034 /* GamesPageViewController.swift */; };
 		193460801F73FA5700AC0034 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1934607F1F73FA5700AC0034 /* GameViewController.swift */; };
+		1934608D1F741DDA00AC0034 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 193460841F741DDA00AC0034 /* FMDatabase.m */; };
+		1934608E1F741DDA00AC0034 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 193460861F741DDA00AC0034 /* FMResultSet.m */; };
+		1934608F1F741DDA00AC0034 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 193460881F741DDA00AC0034 /* FMDatabaseQueue.m */; };
+		193460901F741DDA00AC0034 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1934608A1F741DDA00AC0034 /* FMDatabaseAdditions.m */; };
+		193460911F741DDA00AC0034 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1934608C1F741DDA00AC0034 /* FMDatabasePool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1921B7111F7440F8003FE7BF /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		1921B7151F752642003FE7BF /* AddPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPlayerViewController.swift; sourceTree = "<group>"; };
 		193460541F7144A800AC0034 /* PBCourtOrganizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PBCourtOrganizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		193460571F7144A800AC0034 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1934605C1F7144A800AC0034 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -32,10 +41,22 @@
 		1934606B1F714A9800AC0034 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		1934606D1F72F8EB00AC0034 /* GameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameTableViewController.swift; sourceTree = "<group>"; };
 		1934606F1F72FB4900AC0034 /* CourtTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourtTableViewCell.swift; sourceTree = "<group>"; };
-		193460711F73D8F800AC0034 /* SpareTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpareTableViewCell.swift; sourceTree = "<group>"; };
+		193460711F73D8F800AC0034 /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
 		193460731F73E33300AC0034 /* SharedAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedAssets.swift; sourceTree = "<group>"; };
 		1934607D1F73F90A00AC0034 /* GamesPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamesPageViewController.swift; sourceTree = "<group>"; };
 		1934607F1F73FA5700AC0034 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		193460811F741DD900AC0034 /* PBCourtOrganizer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PBCourtOrganizer-Bridging-Header.h"; sourceTree = "<group>"; };
+		193460821F741DDA00AC0034 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		193460831F741DDA00AC0034 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		193460841F741DDA00AC0034 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		193460851F741DDA00AC0034 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		193460861F741DDA00AC0034 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		193460871F741DDA00AC0034 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		193460881F741DDA00AC0034 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		193460891F741DDA00AC0034 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		1934608A1F741DDA00AC0034 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		1934608B1F741DDA00AC0034 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		1934608C1F741DDA00AC0034 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,17 +64,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1921B7121F7440F8003FE7BF /* libsqlite3.0.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1921B7101F7440F8003FE7BF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1921B7111F7440F8003FE7BF /* libsqlite3.0.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1934604B1F7144A800AC0034 = {
 			isa = PBXGroup;
 			children = (
+				193460921F741DE500AC0034 /* FMDB */,
 				193460561F7144A800AC0034 /* PBCourtOrganizer */,
 				193460551F7144A800AC0034 /* Products */,
+				193460811F741DD900AC0034 /* PBCourtOrganizer-Bridging-Header.h */,
+				1921B7101F7440F8003FE7BF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,17 +105,36 @@
 				193460571F7144A800AC0034 /* AppDelegate.swift */,
 				1934605B1F7144A800AC0034 /* Main.storyboard */,
 				193460691F7148E600AC0034 /* ConfigureCourtsViewController.swift */,
+				1921B7151F752642003FE7BF /* AddPlayerViewController.swift */,
 				1934607D1F73F90A00AC0034 /* GamesPageViewController.swift */,
 				1934607F1F73FA5700AC0034 /* GameViewController.swift */,
 				1934606D1F72F8EB00AC0034 /* GameTableViewController.swift */,
 				1934606B1F714A9800AC0034 /* Common.swift */,
 				1934606F1F72FB4900AC0034 /* CourtTableViewCell.swift */,
-				193460711F73D8F800AC0034 /* SpareTableViewCell.swift */,
+				193460711F73D8F800AC0034 /* PlayerTableViewCell.swift */,
 				1934605E1F7144A800AC0034 /* Assets.xcassets */,
 				193460601F7144A800AC0034 /* LaunchScreen.storyboard */,
 				193460631F7144A800AC0034 /* Info.plist */,
 			);
 			path = PBCourtOrganizer;
+			sourceTree = "<group>";
+		};
+		193460921F741DE500AC0034 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				193460821F741DDA00AC0034 /* FMDB.h */,
+				193460831F741DDA00AC0034 /* FMDatabase.h */,
+				193460841F741DDA00AC0034 /* FMDatabase.m */,
+				193460851F741DDA00AC0034 /* FMResultSet.h */,
+				193460861F741DDA00AC0034 /* FMResultSet.m */,
+				193460871F741DDA00AC0034 /* FMDatabaseQueue.h */,
+				193460881F741DDA00AC0034 /* FMDatabaseQueue.m */,
+				193460891F741DDA00AC0034 /* FMDatabaseAdditions.h */,
+				1934608A1F741DDA00AC0034 /* FMDatabaseAdditions.m */,
+				1934608B1F741DDA00AC0034 /* FMDatabasePool.h */,
+				1934608C1F741DDA00AC0034 /* FMDatabasePool.m */,
+			);
+			name = FMDB;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,6 +170,7 @@
 					193460531F7144A800AC0034 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = R2V7Z98BC4;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -159,12 +212,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				193460741F73E33300AC0034 /* SharedAssets.swift in Sources */,
+				1921B7161F752642003FE7BF /* AddPlayerViewController.swift in Sources */,
 				1934607E1F73F90A00AC0034 /* GamesPageViewController.swift in Sources */,
 				1934606E1F72F8EB00AC0034 /* GameTableViewController.swift in Sources */,
+				1934608D1F741DDA00AC0034 /* FMDatabase.m in Sources */,
 				1934606C1F714A9800AC0034 /* Common.swift in Sources */,
+				1934608F1F741DDA00AC0034 /* FMDatabaseQueue.m in Sources */,
 				193460801F73FA5700AC0034 /* GameViewController.swift in Sources */,
 				1934606A1F7148E600AC0034 /* ConfigureCourtsViewController.swift in Sources */,
-				193460721F73D8F800AC0034 /* SpareTableViewCell.swift in Sources */,
+				193460901F741DDA00AC0034 /* FMDatabaseAdditions.m in Sources */,
+				193460721F73D8F800AC0034 /* PlayerTableViewCell.swift in Sources */,
+				1934608E1F741DDA00AC0034 /* FMResultSet.m in Sources */,
+				193460911F741DDA00AC0034 /* FMDatabasePool.m in Sources */,
 				193460701F72FB4900AC0034 /* CourtTableViewCell.swift in Sources */,
 				193460581F7144A800AC0034 /* AppDelegate.swift in Sources */,
 			);
@@ -291,13 +350,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = R2V7Z98BC4;
 				INFOPLIST_FILE = PBCourtOrganizer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cDs.PBCourtOrganizer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PBCourtOrganizer-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -305,13 +368,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = R2V7Z98BC4;
 				INFOPLIST_FILE = PBCourtOrganizer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cDs.PBCourtOrganizer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PBCourtOrganizer-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
@@ -334,6 +400,7 @@
 				193460681F7144A800AC0034 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

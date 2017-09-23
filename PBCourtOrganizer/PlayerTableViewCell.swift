@@ -1,5 +1,5 @@
 //
-//  SpareTableViewCell.swift
+//  PlayerTableViewCell.swift
 //  PBCourtOrganizer
 //
 //  Created by Evelyn Eldridge on 2017-09-21.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SpareTableViewCell: UITableViewCell {
-  @IBOutlet weak var spareLabel: UILabel!
-
+class PlayerTableViewCell: UITableViewCell {
+  @IBOutlet weak var nameLabel: UILabel!
+  
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

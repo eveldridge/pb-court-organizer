@@ -25,6 +25,10 @@ class GamesPageViewController: UIPageViewController, UIPageViewControllerDelegat
                                        animated: false,
                                        completion: nil)
     
+    
+    
+    
+    
 //    self.addChildViewController(pageController!)
 //    self.view.addSubview(self.pageController!.view)
 //    

@@ -10,8 +10,14 @@ import UIKit
 import GameKit
 
 class ConfigureCourtsViewController: UIViewController {
+  @IBOutlet weak var allPlayersTableVIew: UITableView!
+  @IBOutlet weak var selectedPlayersTableView: UITableView!
+  @IBOutlet weak var numberOfCourtsStepper: UIStepper!
+  @IBOutlet weak var numberOfCourtsLabel: UILabel!
+  @IBOutlet weak var numberOfGamesStepper: UIStepper!
+  @IBOutlet weak var numberOfGamesLabel: UILabel!
   
-  let totalCourts = 2
+  var totalCourts = 4
   var teams = [Team]()
   var sparesCount = 0
   var games = [Game]()
@@ -19,12 +25,41 @@ class ConfigureCourtsViewController: UIViewController {
   var allocatedCount = 0
   var bestAllocatedCount = 0
   var bestGames = [Game]()
+  var allPlayers = [Player]()               // All players in db
+  var allPlayersFiltered = [Player]()       // All players not yet selected
+  var selectedPlayers = [Player]()          // Selected players
+  var newPlayer = Player()
   
-  
+  // MARK: - ViewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
+    selectedPlayersTableView.tableFooterView = UIView()
+    allPlayersTableVIew.backgroundColor = UIColor.groupTableViewBackground
+    allPlayersTableVIew.tableFooterView = UIView()
+    allPlayersTableVIew.delegate = self
+    allPlayersTableVIew.dataSource = self
+    selectedPlayersTableView.delegate = self
+    selectedPlayersTableView.dataSource = self
     
-    addPlayers()
+    SharedAssets.sharedInstance.createDatabase()
+    allPlayersFiltered = SharedAssets.sharedInstance.loadPlayers()
+    allPlayers = allPlayersFiltered
+    allPlayersTableVIew.reloadData()
+  }
+  
+  
+  // MARK: - Create the Schedule Methods
+  func configureCourts () {
+    // The players are saved in the shared instance for use later.
+    SharedAssets.sharedInstance.players = selectedPlayers
+    
+    let minCourtCount = Int(SharedAssets.sharedInstance.players.count / 4)
+    if minCourtCount < Int(numberOfCourtsStepper.value) {
+      totalCourts = minCourtCount
+    } else {
+      totalCourts = Int(numberOfCourtsStepper.value)
+    }
+    totalGames = Int(numberOfGamesStepper.value)
     createTeams()
     
     for _ in 0...100 {
@@ -35,7 +70,6 @@ class ConfigureCourtsViewController: UIViewController {
         bestGames = games
         bestAllocatedCount = allocatedCount
         if allocatedCount == teams.count {
-          print("PERFECT")
           break
         }
       }
@@ -52,9 +86,9 @@ class ConfigureCourtsViewController: UIViewController {
     }
     SharedAssets.sharedInstance.games = bestGames
     printSchedule()
-    
-    // Do any additional setup after loading the view.
   }
+  
+  // If there are any games without 4 players, fix them
   func fixGame (g:Int) {
     let game = bestGames[g]
     var needToAdd = [Int]()
@@ -84,55 +118,6 @@ class ConfigureCourtsViewController: UIViewController {
         break
       }
     }
-    
-    
-    
-    
-  }
-  func addPlayers () {
-    var players = [Player]()
-    let player = Player(firstName: "Evelyn", lastName: "ELdridge")
-    players.append(player)
-    
-    let player1 = Player(firstName: "Pat", lastName: "Bertrand")
-    players.append(player1)
-    
-    //    let player2 = Player(firstName: "Keith", lastName: "Davidson")
-    //    players.append(player2)
-    
-    let player3 = Player(firstName: "Adnan", lastName: "Farhad")
-    players.append(player3)
-    
-    let player4 = Player(firstName: "Mike", lastName: "D")
-    players.append(player4)
-    
-    let player5 = Player(firstName: "Mike", lastName: "G")
-    players.append(player5)
-    
-    let player6 = Player(firstName: "Mark", lastName: "De Abreau")
-    players.append(player6)
-    
-    let player7 = Player(firstName: "Don", lastName: "Thompson")
-    players.append(player7)
-    
-    let player8 = Player(firstName: "Luc", lastName: "Milmot")
-    players.append(player8)
-    
-    let player9 = Player(firstName: "Rob", lastName: "Lutz")
-    players.append(player9)
-    //
-    let player10 = Player(firstName: "Jim", lastName: "MacLaughlin")
-    players.append(player10)
-    
-    //      let player11 = Player(firstName: "Trudy", lastName: "Donnely")
-    //      players.append(player11)
-    
-    SharedAssets.sharedInstance.players = players
-  }
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
   }
   
   func printSchedule () {
@@ -142,15 +127,13 @@ class ConfigureCourtsViewController: UIViewController {
       //      print("GAME: \(i) spares: \(bestGames[i].spares)")
       for j in 0...game.courts.count - 1 {
         let court = game.courts[j]
-
+        
         let t1p1 = getPlayerName(p: court.team1?.player1)
         let t1p2 = getPlayerName(p: court.team1?.player2)
         let t2p1 = getPlayerName(p: court.team2?.player1)
         let t2p2 = getPlayerName(p: court.team2?.player2)
         print("court: \(j) team1: \(t1p1)     \(t1p2)")
         print("            team2: \(t2p1)     \(t2p2)")
-
-        
       }
       print ("SPARES:")
       for spare in game.spares {
@@ -167,14 +150,12 @@ class ConfigureCourtsViewController: UIViewController {
         for j in i + 1...SharedAssets.sharedInstance.players.count - 1 {
           let team = Team(player1: i, player2: j)
           count = count + 1
-          //          print ("\(count) \(team)")
           teams.append(team)
         }
       }
     }
     let shuffled = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: teams)
     teams = shuffled as! [Team]
-    //    print ("total teams = \(teams.count)")
   }
   
   // Create Games with the correct number of empty courts
@@ -204,17 +185,14 @@ class ConfigureCourtsViewController: UIViewController {
     
     var currentSpare = 0
     
-    for i in 0...games.count - 1{
-      //      print ("GAME: \(i)")
-      for j in 1...sparesCount {
+    for i in 0...games.count - 1 {
+      for _ in 1...sparesCount {
         games[i].spares.append(spares[currentSpare])
-        //        print("Spare \(j) \(spares[currentSpare])")
         currentSpare = currentSpare + 1
         if currentSpare > SharedAssets.sharedInstance.players.count - 1 {
           currentSpare = 0
         }
       }
-      
     }
   }
   
@@ -222,7 +200,6 @@ class ConfigureCourtsViewController: UIViewController {
   func assignCourts () {
     allocatedCount = 0
     for team in teams {
-      //      print("Team \(team.player1!) \(team.player2!)")
       var isTeamAllocated = false
       
       // Check each Game
@@ -298,12 +275,146 @@ class ConfigureCourtsViewController: UIViewController {
   }
   
   
-//  // MARK: - Navigation
-//  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//    if segue.identifier == "ShowGame" {
-//      let detailVC = segue.destination as! GameTableViewController
-//      detailVC.game = bestGames[0]
-//    }
-//  }
+  // MARK: - IB Actions
+  @IBAction func changeNumberOfGames(_ sender: Any) {
+    numberOfGamesLabel.text = "\(Int(numberOfGamesStepper.value))"
+  }
+  
+  @IBAction func changeNumberOfCourts(_ sender: Any) {
+    numberOfCourtsLabel.text = "\(Int(numberOfCourtsStepper.value))"
+  }
+  
+  @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer) {
+    let locationInView = sender.location(in: selectedPlayersTableView)
+    if let indexPath = selectedPlayersTableView.indexPathForRow(at: locationInView) {
+      if indexPath.row <= selectedPlayers.count - 1 {
+        allPlayersFiltered.append(selectedPlayers[indexPath.row])
+        selectedPlayers.remove(at: indexPath.row)
+        selectedPlayersTableView.reloadData()
+        allPlayersTableVIew.reloadData()
+      }
+    }
+  }
+  
+  @IBAction func pressSelectAll(_ sender: Any) {
+    selectedPlayers = allPlayers
+    allPlayersFiltered = [Player]()
+    selectedPlayersTableView.reloadData()
+    allPlayersTableVIew.reloadData()
+  }
+  
+  @IBAction func pressClearAll(_ sender: Any) {
+    selectedPlayers = [Player]()
+    allPlayersFiltered = allPlayers
+    selectedPlayersTableView.reloadData()
+    allPlayersTableVIew.reloadData()
+  }
+  @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer) {
+    let locationInView = sender.location(in: allPlayersTableVIew)
+    if let indexPath = allPlayersTableVIew.indexPathForRow(at: locationInView) {
+      if indexPath.row <= allPlayersFiltered.count - 1 {
+        selectedPlayers.append(allPlayersFiltered[indexPath.row])
+        allPlayersFiltered.remove(at: indexPath.row)
+        selectedPlayersTableView.reloadData()
+        allPlayersTableVIew.reloadData()
+      }
+    }
+    
+  }
+  
+  @IBAction func doneAddPlayer(segue: UIStoryboardSegue) {
+    allPlayers.append(newPlayer)
+    allPlayersFiltered.append(newPlayer)
+    allPlayersTableVIew.reloadData()
+  }
+  
+  @IBAction func cancelAddPlayer(segue: UIStoryboardSegue) {
+    
+  }
+  
+  // MARK: - Navigation
+  override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+    if identifier == "createCourts" {
+      if selectedPlayers.count < 3 {
+        showErrorAlert(title: "Wait a Second!", message: "You need to select at least 4 players")
+        return false
+      } else {
+        configureCourts()
+      }
+    }
+    return true
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //    if segue.identifier == "createCourts" {
+    //      configureCourts()
+    //    }
+  }
+  
+  
+  // MARK: - Housekeeping
+  func showErrorAlert (title:String, message:String) {
+    DispatchQueue.main.async {
+      let alert: UIAlertController = UIAlertController(title: title , message:message , preferredStyle: .alert)
+      let cancelActionButton: UIAlertAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .cancel) { action -> Void in
+      }
+      alert.addAction(cancelActionButton)
+      self.present(alert, animated: true, completion: nil)
+    }
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+}
 
+extension ConfigureCourtsViewController : UITableViewDataSource, UITableViewDelegate {
+  
+  // MARK: - Table view Methods
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return 1
+  }
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if tableView == allPlayersTableVIew {
+      return allPlayersFiltered.count
+    } else {
+      return selectedPlayers.count
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath) as! PlayerTableViewCell
+    if tableView == allPlayersTableVIew {
+      
+      var name = ""
+      name = "\(allPlayersFiltered[indexPath.row].firstName) \(allPlayersFiltered[indexPath.row].lastName)"
+      cell.nameLabel.text = name
+      cell.backgroundColor = UIColor.groupTableViewBackground
+    } else {
+      var name = ""
+      name = "\(selectedPlayers[indexPath.row].firstName) \(selectedPlayers[indexPath.row].lastName)"
+      cell.nameLabel.text = name
+    }
+    
+    return cell
+  }
+  
+  func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    if tableView == allPlayersTableVIew {
+      return .delete
+    } else {
+      return .none
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    let player = allPlayersFiltered[indexPath.row]
+    let success = SharedAssets.sharedInstance.deletePlayer(player: player)
+    if success {
+      allPlayersFiltered.remove(at: indexPath.row)
+      tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+  }
 }

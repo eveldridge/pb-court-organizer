@@ -16,6 +16,8 @@ class GameTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.reloadData()
+    tableView.tableFooterView = UIView()
+    
     
   }
   
@@ -38,33 +40,39 @@ class GameTableViewController: UITableViewController {
     }
   }
   
+  override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    if section == 1 {
+      return "Spares"
+    }
+    return ""
+  }
+  
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     if indexPath.section == 0 {
       let court = game.courts[indexPath.row]
       let cell = tableView.dequeueReusableCell(withIdentifier: "CourtCell", for: indexPath) as! CourtTableViewCell
-      cell.courtLabel.text = "Court \(indexPath.row)"
+      cell.courtLabel.text = "\(indexPath.row + 1)"
       
-      cell.team1Label.text = getPlayerName(p: court.team1?.player1) + ", " + getPlayerName(p: court.team1?.player2)
-      cell.team2Label.text = getPlayerName(p: court.team2?.player1) + ", " + getPlayerName(p: court.team2?.player2)
+      cell.team1Label.text = getPlayerName(p: court.team1?.player1) + " / " + getPlayerName(p: court.team1?.player2)
+      cell.team2Label.text = getPlayerName(p: court.team2?.player1) + " / " + getPlayerName(p: court.team2?.player2)
       
       return cell
     } else {
-      let cell = tableView.dequeueReusableCell(withIdentifier: "SpareCell", for: indexPath) as! SpareTableViewCell
-      cell.spareLabel.text = getPlayerName(p: game.spares[indexPath.row])
+      let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath) as! PlayerTableViewCell
+      cell.nameLabel.text = getPlayerName(p: game.spares[indexPath.row])
       return cell
     }
   }
   
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using segue.destinationViewController.
-   // Pass the selected object to the new view controller.
-   }
-   */
+  override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 130
+  }
+  
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    
+    return UITableViewAutomaticDimension
+  }
   
 }
