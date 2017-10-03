@@ -102,49 +102,39 @@ class ConfigureCourtsViewController: UIViewController {
 //    printSchedule()
   }
 
+  // If there are any games without 4 players, fix them
   func fixGame (g:Int) {
-    if let t1 = bestGames[g].courts[0].team1 {
-      bestGames[g].courts[0].team1 = nil
-      teams.append (t1)
-      assignCourts()
+    let game = bestGames[g]
+    var needToAdd = [Int]()
+    for p in 0...SharedAssets.sharedInstance.players.count - 1 {
+      if !isInThisGame(game: game, player: p) {
+        needToAdd.append(p)
+      }
     }
     
-    
+    for c in 0...game.courts.count - 1 {
+      let court = game.courts[c]
+      if court.team1 == nil {
+                print ("NEED to ADD")
+        if needToAdd.count > 1 {
+          let team = Team(player1: needToAdd[0], player2: needToAdd[1])
+          bestGames[g].courts[c].team1 = team
+          needToAdd.removeFirst(2)
+        }
+      }
+      if court.team2 == nil {
+                print ("NEED to ADD")
+        if needToAdd.count > 1 {
+          let team = Team(player1: needToAdd[0], player2: needToAdd[1])
+          bestGames[g].courts[c].team2 = team
+          needToAdd.removeFirst(2)
+        }
+      }
+      if needToAdd.count < 2 {
+        break
+      }
+    }
   }
-  
-  // If there are any games without 4 players, fix them
-//  func fixGame (g:Int) {
-//    let game = bestGames[g]
-//    var needToAdd = [Int]()
-//    for p in 0...SharedAssets.sharedInstance.players.count - 1 {
-//      if !isInThisGame(game: game, player: p) {
-//        needToAdd.append(p)
-//      }
-//    }
-//    
-//    for c in 0...game.courts.count - 1 {
-//      let court = game.courts[c]
-//      if court.team1 == nil {
-//                print ("NEED to ADD")
-//        if needToAdd.count > 1 {
-//          let team = Team(player1: needToAdd[0], player2: needToAdd[1])
-//          bestGames[g].courts[c].team1 = team
-//          needToAdd.removeFirst(2)
-//        }
-//      }
-//      if court.team2 == nil {
-//                print ("NEED to ADD")
-//        if needToAdd.count > 1 {
-//          let team = Team(player1: needToAdd[0], player2: needToAdd[1])
-//          bestGames[g].courts[c].team2 = team
-//          needToAdd.removeFirst(2)
-//        }
-//      }
-//      if needToAdd.count < 2 {
-//        break
-//      }
-//    }
-//  }
   
   func printSchedule () {
     for i in 0...SharedAssets.sharedInstance.games.count - 1 {
