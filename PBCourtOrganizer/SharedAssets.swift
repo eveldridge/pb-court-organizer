@@ -16,6 +16,7 @@ class SharedAssets  {
   let totalCourts = 2
   var sparesCount = 0
   var totalGames = 10
+  var teamsAllocated = ""
   
   let databaseFileName = "PBCourtOrganizerDB.sqlite"
   var pathToDatabase: String!

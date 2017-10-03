@@ -17,6 +17,7 @@ class GameTimerViewController: UIViewController {
   @IBOutlet weak var pauseButton: UIButton!
   @IBOutlet weak var startButton: UIButton!
   @IBOutlet weak var resetButton: UIButton!
+  @IBOutlet weak var allocatedLabel: UILabel!
   
   var seconds = 60 * 15
   var timer = Timer()
@@ -24,12 +25,12 @@ class GameTimerViewController: UIViewController {
   var resumeTapped = false
   
     override func viewDidLoad() {
-        super.viewDidLoad()
+      super.viewDidLoad()
       seconds = Int(timerStepper.value) * 60
       pauseButton.isEnabled = false
       pauseButton.alpha = 0.5
+      allocatedLabel.text = SharedAssets.sharedInstance.teamsAllocated
 
-        // Do any additional setup after loading the view.
     }
 
   func runTimer() {

@@ -14,10 +14,8 @@ class ConfigureCourtsViewController: UIViewController {
   @IBOutlet weak var selectedPlayersTableView: UITableView!
   @IBOutlet weak var numberOfCourtsStepper: UIStepper!
   @IBOutlet weak var numberOfCourtsLabel: UILabel!
-  @IBOutlet weak var numberOfGamesStepper: UIStepper!
-  @IBOutlet weak var numberOfGamesLabel: UILabel!
   
-  var totalCourts = 4
+  var totalCourts = 3
   var teams = [Team]()
   var sparesCount = 0
   var games = [Game]()
@@ -41,6 +39,8 @@ class ConfigureCourtsViewController: UIViewController {
     allPlayersTableVIew.dataSource = self
     selectedPlayersTableView.delegate = self
     selectedPlayersTableView.dataSource = self
+    numberOfCourtsStepper.value = Double(totalCourts)
+    numberOfCourtsLabel.text = "\(Int(numberOfCourtsStepper.value))"
     
     SharedAssets.sharedInstance.createDatabase()
     allPlayersFiltered = SharedAssets.sharedInstance.loadPlayers()
@@ -60,10 +60,11 @@ class ConfigureCourtsViewController: UIViewController {
     } else {
       totalCourts = Int(numberOfCourtsStepper.value)
     }
-    totalGames = Int(numberOfGamesStepper.value)
+//    totalGames = selectedPlayers.count
     createTeams()
+    totalGames = teams.count / (totalCourts * 2)
     
-    for _ in 0...100 {
+    for _ in 0...200 {
       createGames()
       assignSpares()
       assignCourts()
@@ -71,12 +72,13 @@ class ConfigureCourtsViewController: UIViewController {
         bestGames = games
         bestAllocatedCount = allocatedCount
         if allocatedCount == teams.count {
+          print ("Perfect")
           break
         }
       }
       games.removeAll()
     }
-    for g in 0...bestGames.count - 1 {
+    for g in 0...bestGames  .count - 1 {
       let game = bestGames [g]
       for c in 0...game.courts.count - 1 {
         let court = game.courts[c]
@@ -86,46 +88,63 @@ class ConfigureCourtsViewController: UIViewController {
       }
     }
     SharedAssets.sharedInstance.games = bestGames
+    SharedAssets.sharedInstance.teamsAllocated = "\(teams.count - bestAllocatedCount) Duplicate Teams"
+    
+//    print ("teams \(teams.count)")
+//    print ("allocated \(bestAllocatedCount)")
     // Reset the view
     games.removeAll()
     bestGames.removeAll()
+    teams.removeAll()
     allocatedCount = 0
     bestAllocatedCount = 0
     
 //    printSchedule()
   }
-  
-  // If there are any games without 4 players, fix them
+
   func fixGame (g:Int) {
-    let game = bestGames[g]
-    var needToAdd = [Int]()
-    for p in 0...SharedAssets.sharedInstance.players.count - 1 {
-      if !isInThisGame(game: game, player: p) {
-        needToAdd.append(p)
-      }
+    if let t1 = bestGames[g].courts[0].team1 {
+      bestGames[g].courts[0].team1 = nil
+      teams.append (t1)
+      assignCourts()
     }
     
-    for c in 0...game.courts.count - 1 {
-      let court = game.courts[c]
-      if court.team1 == nil {
-        if needToAdd.count > 1 {
-          let team = Team(player1: needToAdd[0], player2: needToAdd[1])
-          bestGames[g].courts[c].team1 = team
-          needToAdd.removeFirst(2)
-        }
-      }
-      if court.team2 == nil {
-        if needToAdd.count > 1 {
-          let team = Team(player1: needToAdd[0], player2: needToAdd[1])
-          bestGames[g].courts[c].team2 = team
-          needToAdd.removeFirst(2)
-        }
-      }
-      if needToAdd.count < 2 {
-        break
-      }
-    }
+    
   }
+  
+  // If there are any games without 4 players, fix them
+//  func fixGame (g:Int) {
+//    let game = bestGames[g]
+//    var needToAdd = [Int]()
+//    for p in 0...SharedAssets.sharedInstance.players.count - 1 {
+//      if !isInThisGame(game: game, player: p) {
+//        needToAdd.append(p)
+//      }
+//    }
+//    
+//    for c in 0...game.courts.count - 1 {
+//      let court = game.courts[c]
+//      if court.team1 == nil {
+//                print ("NEED to ADD")
+//        if needToAdd.count > 1 {
+//          let team = Team(player1: needToAdd[0], player2: needToAdd[1])
+//          bestGames[g].courts[c].team1 = team
+//          needToAdd.removeFirst(2)
+//        }
+//      }
+//      if court.team2 == nil {
+//                print ("NEED to ADD")
+//        if needToAdd.count > 1 {
+//          let team = Team(player1: needToAdd[0], player2: needToAdd[1])
+//          bestGames[g].courts[c].team2 = team
+//          needToAdd.removeFirst(2)
+//        }
+//      }
+//      if needToAdd.count < 2 {
+//        break
+//      }
+//    }
+//  }
   
   func printSchedule () {
     for i in 0...SharedAssets.sharedInstance.games.count - 1 {
@@ -282,11 +301,7 @@ class ConfigureCourtsViewController: UIViewController {
   }
   
   
-  // MARK: - IB Actions
-  @IBAction func changeNumberOfGames(_ sender: Any) {
-    numberOfGamesLabel.text = "\(Int(numberOfGamesStepper.value))"
-  }
-  
+  // MARK: - IB Actions  
   @IBAction func changeNumberOfCourts(_ sender: Any) {
     numberOfCourtsLabel.text = "\(Int(numberOfCourtsStepper.value))"
   }
