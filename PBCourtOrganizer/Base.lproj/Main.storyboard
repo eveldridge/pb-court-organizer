@@ -72,7 +72,7 @@
                                                                                 <rect key="frame" x="0.0" y="1" width="392" height="50"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tA8-vP-q1n" id="jYx-xe-BCj">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="392" height="50"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="392" height="49.5"/>
                                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D4I-sr-jWV">
@@ -152,7 +152,7 @@
                                                                                 <rect key="frame" x="0.0" y="28" width="392" height="50"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yk9-l5-t5x" id="RNe-gE-j41">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="392" height="50"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="392" height="49.5"/>
                                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gCc-oT-QsZ">
@@ -269,6 +269,12 @@
                                         <state key="normal" title="Generate Games!">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <segue destination="qua-tX-xXG" kind="presentation" identifier="createCourts" id="2hL-jG-wr7"/>
                                         </connections>
@@ -456,6 +462,12 @@
                                         <state key="normal" title="Start">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="pressStart:" destination="qua-tX-xXG" eventType="touchUpInside" id="ac7-3D-XoQ"/>
                                         </connections>
@@ -470,6 +482,12 @@
                                         <state key="normal" title="Reset">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="pressReset:" destination="qua-tX-xXG" eventType="touchUpInside" id="JZv-qK-4kj"/>
                                         </connections>
@@ -489,6 +507,12 @@
                                 <state key="normal" title="End Play">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="pressEndPlay:" destination="qua-tX-xXG" eventType="touchUpInside" id="YfF-oV-ORr"/>
                                 </connections>
@@ -540,8 +564,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CompletedCell" rowHeight="40" id="C8q-52-Nrb" customClass="CompletedTableViewCell" customModule="PBCourtOrganizer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="944" height="40"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="C8q-52-Nrb" id="sgT-To-4yC">
+                                    <rect key="frame" x="0.0" y="0.0" width="944" height="40"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game Completed " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdK-rS-Op0">
+                                            <rect key="frame" x="20" y="10" width="138" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <switch opaque="NO" tag="1000" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="HOu-ZI-o1V">
+                                            <rect key="frame" x="181" y="5" width="51" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="onTintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                            <connections>
+                                                <action selector="completedValueChanged:" destination="DiF-yl-ACG" eventType="valueChanged" id="x5y-ve-6Iq"/>
+                                            </connections>
+                                        </switch>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="completedSwitch" destination="HOu-ZI-o1V" id="uTd-6J-0iZ"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CourtCell" rowHeight="135" id="VJu-gw-Vuy" customClass="CourtTableViewCell" customModule="PBCourtOrganizer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="944" height="135"/>
+                                <rect key="frame" x="0.0" y="68" width="944" height="135"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VJu-gw-Vuy" id="Aeg-Of-95Q">
                                     <rect key="frame" x="0.0" y="0.0" width="944" height="135"/>
@@ -637,7 +689,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PlayerCell" rowHeight="40" id="R7C-L7-7yP" customClass="PlayerTableViewCell" customModule="PBCourtOrganizer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="163" width="944" height="40"/>
+                                <rect key="frame" x="0.0" y="203" width="944" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R7C-L7-7yP" id="s8b-4h-Ad0">
                                     <rect key="frame" x="0.0" y="0.0" width="944" height="40"/>
@@ -684,7 +736,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pUA-d0-NqI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4175" y="-38"/>
+            <point key="canvasLocation" x="4174.8046875" y="-38.213762811127374"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="X8Y-Pa-OCd">

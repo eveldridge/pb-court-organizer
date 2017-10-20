@@ -29,6 +29,7 @@
 		193460901F741DDA00AC0034 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1934608A1F741DDA00AC0034 /* FMDatabaseAdditions.m */; };
 		193460911F741DDA00AC0034 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1934608C1F741DDA00AC0034 /* FMDatabasePool.m */; };
 		19EFA1401F99338200AE982B /* GotGameBlipSynth.caf in Resources */ = {isa = PBXBuildFile; fileRef = 19EFA13F1F99338200AE982B /* GotGameBlipSynth.caf */; };
+		19EFA1421F998E3A00AE982B /* CompletedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EFA1411F998E3A00AE982B /* CompletedTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		1934608B1F741DDA00AC0034 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
 		1934608C1F741DDA00AC0034 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
 		19EFA13F1F99338200AE982B /* GotGameBlipSynth.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GotGameBlipSynth.caf; sourceTree = "<group>"; };
+		19EFA1411F998E3A00AE982B /* CompletedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletedTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				1934606B1F714A9800AC0034 /* Common.swift */,
 				1934606F1F72FB4900AC0034 /* CourtTableViewCell.swift */,
 				193460711F73D8F800AC0034 /* PlayerTableViewCell.swift */,
+				19EFA1411F998E3A00AE982B /* CompletedTableViewCell.swift */,
 				1921B7191F76BBF5003FE7BF /* UINavigationController+Style.swift */,
 				1934605E1F7144A800AC0034 /* Assets.xcassets */,
 				193460601F7144A800AC0034 /* LaunchScreen.storyboard */,
@@ -222,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				193460741F73E33300AC0034 /* SharedAssets.swift in Sources */,
+				19EFA1421F998E3A00AE982B /* CompletedTableViewCell.swift in Sources */,
 				1921B7161F752642003FE7BF /* AddPlayerViewController.swift in Sources */,
 				1921B7181F76069C003FE7BF /* GameTimerViewController.swift in Sources */,
 				1934607E1F73F90A00AC0034 /* GamesPageViewController.swift in Sources */,

@@ -16,6 +16,7 @@ class ConfigureCourtsViewController: UIViewController {
   @IBOutlet weak var numberOfCourtsLabel: UILabel!
   @IBOutlet weak var selectedCountLabel: UILabel!
   
+  var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
   var totalCourts = 3
   var teams = [Team]()
   var sparesCount = 0
@@ -34,6 +35,9 @@ class ConfigureCourtsViewController: UIViewController {
   // MARK: - ViewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
+//    activityIndicator.startAnimating()
+    activityIndicator.center = view.center
+    view.addSubview(activityIndicator)
         
     self.navigationController?.styleForPB()
     selectedPlayersTableView.tableFooterView = UIView()
@@ -56,6 +60,7 @@ class ConfigureCourtsViewController: UIViewController {
   
   // MARK: - Create the Schedule Methods
   func configureCourts () {
+    activityIndicator.startAnimating()
     // The players are saved in the shared instance for use later.
     SharedAssets.sharedInstance.players = selectedPlayers
     
@@ -65,20 +70,15 @@ class ConfigureCourtsViewController: UIViewController {
     } else {
       totalCourts = Int(numberOfCourtsStepper.value)
     }
-//    totalGames = selectedPlayers.count
     createTeams()
     worstNotAllocatedCount = teams.count
     totalGames = teams.count / (totalCourts * 2)
     
-//    let count = Double(teams.count) / Double((totalCourts * 2))    
-//    totalGames = Int(ceil(count))
-
-    
     for _ in 0...500 {
+
       createGames()
       assignSpares()
       assignCourts()
-//      if allocatedCount > bestAllocatedCount {
       if worstNotAllocatedCount > notAllocatedCount {
         worstNotAllocatedCount = notAllocatedCount
         bestGames = games
@@ -90,7 +90,7 @@ class ConfigureCourtsViewController: UIViewController {
       }
       games.removeAll()
     }
-    for g in 0...bestGames  .count - 1 {
+    for g in 0...bestGames.count - 1 {
       let game = bestGames [g]
       for c in 0...game.courts.count - 1 {
         let court = game.courts[c]
@@ -110,8 +110,8 @@ class ConfigureCourtsViewController: UIViewController {
     teams.removeAll()
     allocatedCount = 0
     bestAllocatedCount = 0
-    
 //    printSchedule()
+    activityIndicator.stopAnimating()
   }
 
   // If there are any games without 4 players, fix them
@@ -359,26 +359,25 @@ class ConfigureCourtsViewController: UIViewController {
       if notAllocatedCount >= worstNotAllocatedCount {
         break
       }
-    }
+    } //END of allocating Teams
   }
   
   func isInThisGame(game:Game, player:Int) -> Bool {
-    var inThisGame = false
+    // Check the spares for this game
+    for spare in game.spares {
+      if player == spare {
+        return true
+      }
+    }
     
     // Check each court for this Game
     for currentCourt in game.courts {
       if isPlayingOnCourt(player: player, court: currentCourt) {
-        inThisGame = true
-      }
-    }  // END of checking Courts
-    
-    // Check the spares for this game
-    for spare in game.spares {
-      if player == spare {
-        inThisGame = true
+        return true
       }
     }
-    return inThisGame
+    
+    return false
   }
   
   func isPlayingOnCourt(player:Int, court:Court) -> Bool {

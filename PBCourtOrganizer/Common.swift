@@ -35,6 +35,7 @@ struct Court {
 struct Game {
   var courts = [Court]()
   var spares = [Int]()
+  var completed = false
 }
 
 
