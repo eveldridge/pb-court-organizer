@@ -8,66 +8,217 @@
 
 import UIKit
 import AVFoundation
+import UserNotifications
 
 class GameTimerViewController: UIViewController {
-
+  
   @IBOutlet weak var timerStepper: UIStepper!
   @IBOutlet weak var timerLabel: UILabel!
-  
-  @IBOutlet weak var pauseButton: UIButton!
+  @IBOutlet weak var allocatedLabel: UILabel!
   @IBOutlet weak var startButton: UIButton!
   @IBOutlet weak var resetButton: UIButton!
-  @IBOutlet weak var allocatedLabel: UILabel!
   
-  var seconds = 60 * 15
+  var countdownSeconds = 60 * 15.0  // Default to 15 minutes.
   var timer = Timer()
   var isTimerRunning = false
   var resumeTapped = false
+  var endTime = Date()
+  var player: AVAudioPlayer?
   
-    override func viewDidLoad() {
-      super.viewDidLoad()
-      seconds = Int(timerStepper.value) * 60
-      pauseButton.isEnabled = false
-      pauseButton.alpha = 0.5
-      allocatedLabel.text = SharedAssets.sharedInstance.teamsAllocated
-
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    // Setup the View
+    allocatedLabel.text = SharedAssets.sharedInstance.teamsAllocated
+    resetTimer()
+    
+    // Check for UserNotification Permissions
+    if #available(iOS 10.0, *) {
+      UNUserNotificationCenter.current().getNotificationSettings { (notificationSettings) in
+        switch notificationSettings.authorizationStatus {
+        case .notDetermined:
+          self.requestAuthorization(completionHandler: { (success) in
+            guard success else { return }
+            // Do nothing
+          })
+          break
+        // Request Authorization
+        case .authorized:
+          // Do nothing
+          break
+        case .denied:
+          self.showErrorAlert(title: "Notifications are Required", message: "Please Allow Notifications to be used in this app to recieve the alarm")
+        }
+      }
+    } else {
+      if !areNotificationsEnabled() {
+        self.showErrorAlert(title: "Notifications are Required", message: "Please Allow Notifications to be used in this app to recieve the alarm")
+      }
     }
+  }
+  
+  private func requestAuthorization(completionHandler: @escaping (_ success: Bool) -> ()) {
+    // Request Authorization
+    if #available(iOS 10.0, *) {
+      UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (success, error) in
+        if let error = error {
+          print("Request Authorization Failed (\(error), \(error.localizedDescription))")
+        }
+        
+        completionHandler(success)
+      }
+    } else {
+      // Fallback on earlier versions
+    }
+  }
+  
+  func resetTimer () {
+    player?.stop()
+    timerStepper.value = 15
+    countdownSeconds = timerStepper.value * 60
+    
+    // EV TESTING
+//    countdownSeconds = 15
+    
+    timerLabel.text = timeString(time: TimeInterval(countdownSeconds))
+    startButton.isEnabled = true
+    startButton.alpha = 1.0
+    startButton.setTitle("Start",for: .normal)
+    isTimerRunning = false
+    timer.invalidate()
+    UIApplication.shared.cancelAllLocalNotifications()
+    timerStepper.isEnabled = true
+    timerStepper.alpha = 1.0
+  }
+  
+  func pauseTimer () {
+    isTimerRunning = false
+    timer.invalidate()
+    UIApplication.shared.cancelAllLocalNotifications()
+    startButton.setTitle("Start",for: .normal)
+  }
 
-  func runTimer() {
-    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
+  func startTimer () {
+    endTime = Date().addingTimeInterval(countdownSeconds)
+    createNotification()
     isTimerRunning = true
-    pauseButton.isEnabled = true
-    pauseButton.alpha = 1.0
+    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(updateTimer)), userInfo: nil, repeats: true)
+    startButton.setTitle("Pause",for: .normal)
+    timerStepper.isEnabled = false
+    timerStepper.alpha = 0.5
+  }
+  
+  func stopTimer () {
+    timer.invalidate()
+    isTimerRunning = false
+    startButton.setTitle("Complete", for: .normal)
+    startButton.isEnabled = false
+    startButton.alpha = 0.5
+    timerLabel.text = timeString(time: 0)
   }
   
   func updateTimer() {
-    if seconds < 1 {
-      timer.invalidate()
-      let systemSoundID: SystemSoundID = 1304
-      AudioServicesPlaySystemSound (systemSoundID)
-      pauseButton.isEnabled = false
-      pauseButton.alpha = 0.5
+    if countdownSeconds < -2 {
+      stopTimer()
+    } else if countdownSeconds < 1 {
+      stopTimer()
+      playSound()
     } else {
-      seconds -= 1
-      timerLabel.text = timeString(time: TimeInterval(seconds))
+      countdownSeconds = endTime.timeIntervalSinceNow
+      if countdownSeconds < 1 {
+        countdownSeconds = 0
+      }
+      timerLabel.text = timeString(time: TimeInterval(countdownSeconds))
+    }
+  }
+  
+  func areNotificationsEnabled() -> Bool {
+    guard let settings = UIApplication.shared.currentUserNotificationSettings else {
+      return false
+    }
+    
+    return settings.types.intersection([.alert, .badge, .sound]).isEmpty != true
+  }
+  
+
+  
+  func playSound() {
+    guard let url = Bundle.main.url(forResource: "GotGameBlipSynth", withExtension: "caf") else { return }
+    
+    do {
+      try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+      try AVAudioSession.sharedInstance().setActive(true)
+      
+      
+      
+      /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
+//      player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+      
+      // iOS 10 and earlier require the following line:
+       player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeCoreAudioFormat)
+      
+      guard let player = player else { return }
+      
+      player.play()
+      
+    } catch let error {
+      print(error.localizedDescription)
+    }
+  }
+  
+  func createNotification () {
+    if areNotificationsEnabled() {
+      // Create Notification Content
+      if #available(iOS 10.0, *) {
+        let notificationContent = UNMutableNotificationContent()
+        // Configure Notification Content
+        notificationContent.title = "PB Court Organizer"
+        notificationContent.subtitle = "Game Timer"
+        notificationContent.body = "Time is UP!"
+        notificationContent.sound = UNNotificationSound.default()
+        
+        // Add Trigger
+        let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: countdownSeconds, repeats: false)
+        
+        // Create Notification Request
+        let notificationRequest = UNNotificationRequest(identifier: "cocoacasts_local_notification", content: notificationContent, trigger: notificationTrigger)
+        
+        // Add Request to User Notification Center
+        UNUserNotificationCenter.current().add(notificationRequest) { (error) in
+          if let error = error {
+            print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
+          }
+        }
+      } else {
+        // Fallback on earlier versions
+        //make the local notification
+        let localNotification = UILocalNotification()
+        localNotification.fireDate = endTime
+        localNotification.alertBody = "Game Over!"
+        localNotification.soundName = "GotGameBlipSynth.caf"
+        UIApplication.shared.scheduleLocalNotification(localNotification)
+        
+      }
+    } else {
+      print(("No notifications enabled"))
     }
   }
   
   
+  
   @IBAction func changeTime(_ sender: Any) {
-    seconds = Int(timerStepper.value) * 60
-    timerLabel.text = timeString(time: TimeInterval(seconds))
+    countdownSeconds = timerStepper.value * 60
+    timerLabel.text = timeString(time: TimeInterval(countdownSeconds))
   }
   
   @IBAction func pressStart(_ sender: Any) {
     if isTimerRunning == false {
-      runTimer()
-      startButton.isEnabled = false
-      startButton.alpha = 0.5
-      timerStepper.isEnabled = false
-      let systemSoundID: SystemSoundID = 1103
-      AudioServicesPlaySystemSound (systemSoundID)
+      startTimer()
+    } else {
+      pauseTimer()
     }
+    let systemSoundID: SystemSoundID = 1103
+    AudioServicesPlaySystemSound (systemSoundID)
     
   }
   @IBAction func pressEndPlay(_ sender: Any) {
@@ -86,31 +237,10 @@ class GameTimerViewController: UIViewController {
     self.present(alert, animated: true, completion: nil)
   }
   
-  @IBAction func pressPause(_ sender: Any) {
-    let systemSoundID: SystemSoundID = 1103
-    AudioServicesPlaySystemSound (systemSoundID)
-    if self.resumeTapped == false {
-      timer.invalidate()
-      self.resumeTapped = true
-      self.pauseButton.setTitle("Resume",for: .normal)
-    } else {
-      runTimer()
-      self.resumeTapped = false
-      self.pauseButton.setTitle("Pause",for: .normal)
-    }
-  }
   @IBAction func pressReset(_ sender: Any) {
     let systemSoundID: SystemSoundID = 1103
     AudioServicesPlaySystemSound (systemSoundID)
-    timer.invalidate()
-    seconds = Int(timerStepper.value) * 60
-    timerLabel.text = timeString(time: TimeInterval(seconds))
-    isTimerRunning = false
-    pauseButton.isEnabled = false
-    pauseButton.alpha = 0.5
-    startButton.isEnabled = true
-    startButton.alpha = 1.0
-    timerStepper.isEnabled = true
+    resetTimer()
   }
   
   func timeString(time:TimeInterval) -> String {
@@ -124,9 +254,23 @@ class GameTimerViewController: UIViewController {
     }
   }
   
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+  deinit {
+    UIApplication.shared.cancelAllLocalNotifications()
+  }
+  
+  func showErrorAlert (title:String, message:String) {
+    DispatchQueue.main.async {
+      let alert: UIAlertController = UIAlertController(title: title , message:message , preferredStyle: .alert)
+      let cancelActionButton: UIAlertAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .cancel) { action -> Void in
+      }
+      alert.addAction(cancelActionButton)
+      self.present(alert, animated: true, completion: nil)
     }
-
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
 }

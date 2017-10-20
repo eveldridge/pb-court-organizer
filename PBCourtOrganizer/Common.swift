@@ -24,6 +24,7 @@ struct Player {
 struct Team {
   var player1: Int!
   var player2: Int!
+  var isDuplicate = false
 }
 
 struct Court {

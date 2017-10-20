@@ -84,6 +84,16 @@ class GameTableViewController: UITableViewController {
       
       cell.team1Label.text = getPlayerName(p: court.team1?.player1) + " / " + getPlayerName(p: court.team1?.player2)
       cell.team2Label.text = getPlayerName(p: court.team2?.player1) + " / " + getPlayerName(p: court.team2?.player2)
+      if (court.team1?.isDuplicate)! {
+        cell.team1Label.textColor = UIColor.red
+      } else {
+        cell.team1Label.textColor = UIColor.black
+      }
+      if (court.team2?.isDuplicate)! {
+        cell.team2Label.textColor = UIColor.red
+      } else {
+        cell.team2Label.textColor = UIColor.black
+      }
       
       return cell
     } else {

@@ -14,6 +14,7 @@ class ConfigureCourtsViewController: UIViewController {
   @IBOutlet weak var selectedPlayersTableView: UITableView!
   @IBOutlet weak var numberOfCourtsStepper: UIStepper!
   @IBOutlet weak var numberOfCourtsLabel: UILabel!
+  @IBOutlet weak var selectedCountLabel: UILabel!
   
   var totalCourts = 3
   var teams = [Team]()
@@ -21,6 +22,8 @@ class ConfigureCourtsViewController: UIViewController {
   var games = [Game]()
   var totalGames = 10
   var allocatedCount = 0
+  var notAllocatedCount = 0
+  var worstNotAllocatedCount = 0
   var bestAllocatedCount = 0
   var bestGames = [Game]()
   var allPlayers = [Player]()               // All players in db
@@ -31,6 +34,7 @@ class ConfigureCourtsViewController: UIViewController {
   // MARK: - ViewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
+        
     self.navigationController?.styleForPB()
     selectedPlayersTableView.tableFooterView = UIView()
     allPlayersTableVIew.backgroundColor = UIColor.groupTableViewBackground
@@ -46,6 +50,7 @@ class ConfigureCourtsViewController: UIViewController {
     allPlayersFiltered = SharedAssets.sharedInstance.loadPlayers()
     allPlayers = allPlayersFiltered
     allPlayersTableVIew.reloadData()
+    updateCount()
   }
   
   
@@ -62,13 +67,20 @@ class ConfigureCourtsViewController: UIViewController {
     }
 //    totalGames = selectedPlayers.count
     createTeams()
+    worstNotAllocatedCount = teams.count
     totalGames = teams.count / (totalCourts * 2)
     
-    for _ in 0...200 {
+//    let count = Double(teams.count) / Double((totalCourts * 2))    
+//    totalGames = Int(ceil(count))
+
+    
+    for _ in 0...500 {
       createGames()
       assignSpares()
       assignCourts()
-      if allocatedCount > bestAllocatedCount {
+//      if allocatedCount > bestAllocatedCount {
+      if worstNotAllocatedCount > notAllocatedCount {
+        worstNotAllocatedCount = notAllocatedCount
         bestGames = games
         bestAllocatedCount = allocatedCount
         if allocatedCount == teams.count {
@@ -88,10 +100,10 @@ class ConfigureCourtsViewController: UIViewController {
       }
     }
     SharedAssets.sharedInstance.games = bestGames
-    SharedAssets.sharedInstance.teamsAllocated = "\(teams.count - bestAllocatedCount) Duplicate Teams"
+    SharedAssets.sharedInstance.teamsAllocated = "\(totalGames * totalCourts * 2 - bestAllocatedCount) Duplicate Teams"
     
-//    print ("teams \(teams.count)")
-//    print ("allocated \(bestAllocatedCount)")
+    print ("teams \(teams.count)")
+    print ("allocated \(bestAllocatedCount)")
     // Reset the view
     games.removeAll()
     bestGames.removeAll()
@@ -115,17 +127,15 @@ class ConfigureCourtsViewController: UIViewController {
     for c in 0...game.courts.count - 1 {
       let court = game.courts[c]
       if court.team1 == nil {
-                print ("NEED to ADD")
         if needToAdd.count > 1 {
-          let team = Team(player1: needToAdd[0], player2: needToAdd[1])
+          let team = Team(player1: needToAdd[0], player2: needToAdd[1], isDuplicate: true)
           bestGames[g].courts[c].team1 = team
           needToAdd.removeFirst(2)
         }
       }
       if court.team2 == nil {
-                print ("NEED to ADD")
         if needToAdd.count > 1 {
-          let team = Team(player1: needToAdd[0], player2: needToAdd[1])
+          let team = Team(player1: needToAdd[0], player2: needToAdd[1], isDuplicate: true)
           bestGames[g].courts[c].team2 = team
           needToAdd.removeFirst(2)
         }
@@ -164,7 +174,7 @@ class ConfigureCourtsViewController: UIViewController {
     for i in 0...SharedAssets.sharedInstance.players.count - 1 {
       if i < SharedAssets.sharedInstance.players.count - 1 {
         for j in i + 1...SharedAssets.sharedInstance.players.count - 1 {
-          let team = Team(player1: i, player2: j)
+          let team = Team(player1: i, player2: j, isDuplicate: false)
           count = count + 1
           teams.append(team)
         }
@@ -211,10 +221,96 @@ class ConfigureCourtsViewController: UIViewController {
       }
     }
   }
+
+//  func assignCourts () {
+//    allocatedCount = 0
+//    var t = 0
+//    var removedCount = 0
+//    while t < teams.count  {
+//      let team = teams[t]
+////    }
+////    for team in teams {
+//      var isTeamAllocated = false
+//      
+//      // Check each Game
+//      for i in 0...games.count - 1 {
+//        var currentGame = games[i]
+//        var inThisGame = false
+//        
+//        if isInThisGame(game: currentGame, player: team.player1) {
+//          inThisGame = true
+//        }
+//        
+//        if isInThisGame(game: currentGame, player: team.player2) {
+//          inThisGame = true
+//        }
+//        
+//        // IF not in this game, then add them.
+//        if !inThisGame {
+//          // Add to the first available court
+//          
+//          for j in 0...totalCourts - 1 {
+//            let court = currentGame.courts[j]
+//            if court.team1 == nil {
+//              games[i].courts[j].team1 = team
+//              isTeamAllocated = true
+//              break
+//            } else if court.team2 == nil {
+//              games[i].courts[j].team2 = team
+//              isTeamAllocated = true
+//              break
+//            }
+//          }
+//        }
+//        
+//        // If the team is allocated, then don't bother checking the rest of the games
+//        if isTeamAllocated {
+//          allocatedCount = allocatedCount + 1
+//          t = t + 1
+//          break
+//        }
+//      }  // END of checking each game
+//      if isTeamAllocated == false {
+//        // remove the last team
+//        for (g, game) in games.enumerated() {
+//          for (c, court) in game.courts.enumerated() {
+//            if games[g].courts[c].team1?.player1 == teams[t-1].player1 &&
+//              games[g].courts[c].team1?.player2 == teams[t-1].player2 {
+//              games[g].courts[c].team1 = nil
+//              print ("team removed")
+//              removedCount = removedCount + 1
+//              allocatedCount = allocatedCount - 1
+//              break
+//            }
+//            if games[g].courts[c].team2?.player1 == teams[t-1].player1 &&
+//              games[g].courts[c].team2?.player2 == teams[t-1].player2 {
+//              games[g].courts[c].team2 = nil
+//              print ("team removed")
+//              removedCount = removedCount + 1
+//              allocatedCount = allocatedCount - 1
+//              break
+//            }
+//          }
+//        }
+//        
+//        
+//        let lastTeam = teams.remove(at: t - 1)
+//        teams.insert(lastTeam, at: teams.count - 1)
+//        t = t - 1
+//        if removedCount > teams.count {
+//          print ("no solution")
+//          break
+//        }
+//      }
+//    }
+//  }
+
+  
   
   // Put each team onto Courts, some teams won't fit
   func assignCourts () {
     allocatedCount = 0
+    notAllocatedCount = 0
     for team in teams {
       var isTeamAllocated = false
       
@@ -257,6 +353,12 @@ class ConfigureCourtsViewController: UIViewController {
           break
         }
       }  // END of checking each game
+      if isTeamAllocated == false {
+        notAllocatedCount = notAllocatedCount + 1
+      }
+      if notAllocatedCount >= worstNotAllocatedCount {
+        break
+      }
     }
   }
   
@@ -290,6 +392,9 @@ class ConfigureCourtsViewController: UIViewController {
     return isAllocated
   }
   
+  func updateCount () {
+    selectedCountLabel.text = "\(selectedPlayers.count) players selected"
+  }
   
   // MARK: - IB Actions  
   @IBAction func changeNumberOfCourts(_ sender: Any) {
@@ -304,6 +409,7 @@ class ConfigureCourtsViewController: UIViewController {
         selectedPlayers.remove(at: indexPath.row)
         selectedPlayersTableView.reloadData()
         allPlayersTableVIew.reloadData()
+        updateCount()
       }
     }
   }
@@ -313,6 +419,7 @@ class ConfigureCourtsViewController: UIViewController {
     allPlayersFiltered = [Player]()
     selectedPlayersTableView.reloadData()
     allPlayersTableVIew.reloadData()
+    updateCount()
   }
   
   @IBAction func pressClearAll(_ sender: Any) {
@@ -320,7 +427,9 @@ class ConfigureCourtsViewController: UIViewController {
     allPlayersFiltered = allPlayers
     selectedPlayersTableView.reloadData()
     allPlayersTableVIew.reloadData()
+    updateCount()
   }
+  
   @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer) {
     let locationInView = sender.location(in: allPlayersTableVIew)
     if let indexPath = allPlayersTableVIew.indexPathForRow(at: locationInView) {
@@ -329,9 +438,9 @@ class ConfigureCourtsViewController: UIViewController {
         allPlayersFiltered.remove(at: indexPath.row)
         selectedPlayersTableView.reloadData()
         allPlayersTableVIew.reloadData()
+        updateCount()
       }
     }
-    
   }
   
   @IBAction func doneAddPlayer(segue: UIStoryboardSegue) {
@@ -347,7 +456,7 @@ class ConfigureCourtsViewController: UIViewController {
   // MARK: - Navigation
   override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
     if identifier == "createCourts" {
-      if selectedPlayers.count < 3 {
+      if selectedPlayers.count < 4 {
         showErrorAlert(title: "Wait a Second!", message: "You need to select at least 4 players")
         return false
       } else {
@@ -358,9 +467,7 @@ class ConfigureCourtsViewController: UIViewController {
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //    if segue.identifier == "createCourts" {
-    //      configureCourts()
-    //    }
+    
   }
   
   
@@ -377,7 +484,6 @@ class ConfigureCourtsViewController: UIViewController {
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
   }
 }
 
